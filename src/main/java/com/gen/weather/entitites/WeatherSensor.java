@@ -1,37 +1,40 @@
 package com.gen.weather.entitites;
 
+import com.gen.weather.models.WeatherSensorCreateDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity(name = "weather_sensors")
-public class WeatherSensor extends ManagedEntity {
-  @Column(name = "weather_station_id")
-  private String weatherStationId;
+public class WeatherSensor extends IdentifiableEntity {
+  @Column(name = "weather_station_id", updatable = false)
+  private UUID weatherStationId;
 
-  @Column(name = "latest_update")
-  private LocalDateTime latestUpdate;
+  @Column(name = "last_data_creation_timestamp")
+  private LocalDateTime lastDataCreationTimestamp;
 
-  @Column(name = "sensor_status")
+  @Column(name = "sensor_status", nullable = false)
   @Enumerated(EnumType.STRING)
-  private SensorStatus sensorStatus;
+  private SensorStatus sensorStatus = SensorStatus.LIVE;
 
-  public String getWeatherStationId() {
+  public UUID getWeatherStationId() {
     return weatherStationId;
   }
 
-  public void setWeatherStationId(String weatherStationId) {
+  public void setWeatherStationId(UUID weatherStationId) {
     this.weatherStationId = weatherStationId;
   }
 
-  public LocalDateTime getLatestUpdate() {
-    return latestUpdate;
+  public LocalDateTime getLastDataCreationTimestamp() {
+    return lastDataCreationTimestamp;
   }
 
-  public void setLatestUpdate(LocalDateTime latestUpdate) {
-    this.latestUpdate = latestUpdate;
+  public void setLastDataCreationTimestamp(LocalDateTime lastDataCreationTimestamp) {
+    this.lastDataCreationTimestamp = lastDataCreationTimestamp;
   }
 
   public SensorStatus getSensorStatus() {

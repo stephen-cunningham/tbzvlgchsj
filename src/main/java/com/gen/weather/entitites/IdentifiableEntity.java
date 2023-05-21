@@ -9,11 +9,11 @@ import jakarta.persistence.MappedSuperclass;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class ManagedEntity {
+public abstract class IdentifiableEntity {
   @Id
   @GeneratedValue
   @JsonProperty(access = Access.READ_ONLY)
-  @Column(columnDefinition = "uuid")
+  @Column(columnDefinition = "uuid", nullable = false)
   private UUID id;
 
   public UUID getId() {

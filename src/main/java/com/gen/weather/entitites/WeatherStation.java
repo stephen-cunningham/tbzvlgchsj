@@ -1,14 +1,15 @@
 package com.gen.weather.entitites;
 
+import com.gen.weather.models.WeatherStationDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity(name = "weather_stations")
-public class WeatherStation extends ManagedEntity {
-  @Column(name = "latitude")
+public class WeatherStation extends IdentifiableEntity {
+  @Column(nullable = false)
   private Double latitude;
 
-  @Column(name = "longitude")
+  @Column(nullable = false)
   private Double longitude;
 
   public Double getLatitude() {
@@ -25,5 +26,13 @@ public class WeatherStation extends ManagedEntity {
 
   public void setLongitude(Double longitude) {
     this.longitude = longitude;
+  }
+
+  public static WeatherStation from(WeatherStationDTO weatherStationDTO) {
+    WeatherStation weatherStation = new WeatherStation();
+    weatherStation.setLongitude(weatherStationDTO.longitude());
+    weatherStation.setLatitude(weatherStationDTO.latitude());
+
+    return weatherStation;
   }
 }

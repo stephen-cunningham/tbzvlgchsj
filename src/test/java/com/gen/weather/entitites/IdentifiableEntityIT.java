@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
-public class ManagedEntityIT {
+public class IdentifiableEntityIT {
   @Autowired private EntityManager entityManager;
 
   @Test
@@ -21,5 +21,5 @@ public class ManagedEntityIT {
   }
 
   @Entity
-  private static class TestEntity extends ManagedEntity {}
+  private static class TestEntity extends IdentifiableEntity {}
 }

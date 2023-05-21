@@ -9,18 +9,18 @@ import org.junit.jupiter.api.Test;
 class WeatherSensorTest {
   @Test
   void gettersAndSetters_ShouldWork() {
-    final String weatherStationId = UUID.randomUUID().toString();
+    final UUID weatherStationId = UUID.randomUUID();
     final LocalDateTime  latestUpdate = LocalDateTime.now();
     final SensorStatus sensorStatus = SensorStatus.FAULT;
 
     WeatherSensor weatherSensor = new WeatherSensor();
-    weatherSensor.setLatestUpdate(latestUpdate);
+    weatherSensor.setLastDataCreationTimestamp(latestUpdate);
     weatherSensor.setSensorStatus(sensorStatus);
     weatherSensor.setWeatherStationId(weatherStationId);
 
     assertAll(
         () -> assertEquals(weatherStationId, weatherSensor.getWeatherStationId()),
-        () -> assertEquals(latestUpdate, weatherSensor.getLatestUpdate()),
+        () -> assertEquals(latestUpdate, weatherSensor.getLastDataCreationTimestamp()),
         () -> assertEquals(sensorStatus, weatherSensor.getSensorStatus())
     );
   }

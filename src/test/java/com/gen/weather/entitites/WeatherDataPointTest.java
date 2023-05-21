@@ -1,15 +1,16 @@
 package com.gen.weather.entitites;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
-import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WeatherDataPointTest {
   @Test
   void gettersAndSetters_ShouldWork() {
-    final String weatherSensorId = UUID.randomUUID().toString();
+    final UUID weatherSensorId = UUID.randomUUID();
     final MetricType metricType = MetricType.HUMIDITY;
     final Double metricValue = 20.1;
 
