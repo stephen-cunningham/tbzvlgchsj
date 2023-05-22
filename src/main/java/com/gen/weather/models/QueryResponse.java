@@ -7,5 +7,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public record QueryResponse(List<UUID> ids, LocalDateTime timeFrom, LocalDateTime timeTo, MetricStatistic metricStatistic, MetricType metricType, Double result) {
+public record QueryResponse(LocalDateTime timeFrom, LocalDateTime timeTo, MetricStatistic metricStatistic, MetricType metricType, Double result) {
 }

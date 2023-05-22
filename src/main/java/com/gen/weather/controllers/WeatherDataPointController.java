@@ -31,12 +31,12 @@ public class WeatherDataPointController {
 
     @GetMapping(URI_BASE + "/search/query")
     public ResponseEntity<QueryResponse> query(
-            @RequestParam(value = "ids", required = false) List<UUID> ids,
+            @RequestParam(value = "sensorId", required = false) List<UUID> sensorIds,
             @RequestParam(value = "timeFrom", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime timeFrom,
             @RequestParam(value = "timeTo", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime timeTo,
             @RequestParam(value = "statistic") MetricStatistic metricStatistic,
             @RequestParam(value = "metricType", required = false) MetricType metricType) {
-        QueryResponse queryResponse = weatherDataPointService.query(ids, timeFrom, timeTo, metricStatistic, metricType);
+        QueryResponse queryResponse = weatherDataPointService.query(sensorIds, timeFrom, timeTo, metricStatistic, metricType);
         return ResponseEntity.ok(queryResponse);
     }
 

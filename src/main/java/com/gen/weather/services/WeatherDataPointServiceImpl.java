@@ -11,24 +11,28 @@ import com.gen.weather.repositories.WeatherSensorRepository;
 import com.gen.weather.utils.TimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
 public class WeatherDataPointServiceImpl implements WeatherDataPointService {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeatherDataPointServiceImpl.class);
+    private final Map<String, MetricAggregationStrategy> metricAggregationStrategyMap;
 
     private final WeatherDataPointRepository weatherDataPointRepository;
     private final WeatherSensorRepository weatherSensorRepository;
 
-    public WeatherDataPointServiceImpl(WeatherDataPointRepository weatherDataPointRepository, WeatherSensorRepository weatherSensorRepository) {
+    public WeatherDataPointServiceImpl(WeatherDataPointRepository weatherDataPointRepository, WeatherSensorRepository weatherSensorRepository, Map<String, MetricAggregationStrategy> metricAggregationStrategyMap) {
         this.weatherDataPointRepository = weatherDataPointRepository;
         this.weatherSensorRepository = weatherSensorRepository;
+        this.metricAggregationStrategyMap = metricAggregationStrategyMap;
     }
 
     @Override
@@ -37,7 +41,7 @@ public class WeatherDataPointServiceImpl implements WeatherDataPointService {
         timeFrom = times[0];
         timeTo = times[1];
 
-        LOGGER.info(String.format("Filtering Weather Data Points with timeFrom %s and timeTo %s", timeFrom, timeTo));
+        LOGGER.debug(String.format("Filtering Weather Data Points with timeFrom %s and timeTo %s", timeFrom, timeTo));
         List<Double> weatherDataPointMetricValues = getWeatherDataPointMetricValues(weatherSensorIds, timeFrom, timeTo, metricType);
 
         if (weatherDataPointMetricValues.size() == 0) {
@@ -46,9 +50,9 @@ public class WeatherDataPointServiceImpl implements WeatherDataPointService {
             throw new NotFoundException(message);
         }
 
-        Double result = aggregate(metricStatistic, weatherDataPointMetricValues);
+        Double result = metricAggregationStrategyMap.get(metricStatistic.toString()).aggregate(weatherDataPointMetricValues);
 
-        return new QueryResponse(weatherSensorIds, timeFrom, timeTo, metricStatistic, metricType, result);
+        return new QueryResponse(timeFrom, timeTo, metricStatistic, metricType, result);
     }
 
     private List<Double> getWeatherDataPointMetricValues(List<UUID> weatherSensorIds, LocalDateTime timeFrom, LocalDateTime timeTo, MetricType metricType) {
@@ -64,17 +68,6 @@ public class WeatherDataPointServiceImpl implements WeatherDataPointService {
         }
 
         return weatherDataPointMetricValues;
-    }
-
-    private static Double aggregate(MetricStatistic metricStatistic, List<Double> weatherDataPointMetricValues) {
-        MetricAggregationStrategy metricAggregationStrategy = switch (metricStatistic) {
-            case MAX -> new MaxMetricAggregationStrategy();
-            case MIN -> new MinMetricAggregationStrategy();
-            case AVERAGE -> new AverageMetricAggregationStrategy();
-            case SUM -> new SumMetricAggregationStrategy();
-        };
-
-        return metricAggregationStrategy.aggregate(weatherDataPointMetricValues);
     }
 
     @Override
