@@ -1,0 +1,334 @@
+{
+  "info": {
+    "_postman_id": "d682cd23-7a88-453c-a331-8f579916fa8f",
+    "name": "Weather API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27524377"
+  },
+  "item": [
+    {
+      "name": "Weather Data Points",
+      "item": [
+        {
+          "name": "All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:16001/weatherDataPoints",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "16001",
+              "path": [
+                "weatherDataPoints"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "b",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "a",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Most recent by sensor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:16001/weatherDataPoints/search/findMostRecentByWeatherSensorId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "16001",
+              "path": [
+                "weatherDataPoints",
+                "search",
+                "findMostRecentByWeatherSensorId"
+              ],
+              "query": [
+                {
+                  "key": "weatherSensorId",
+                  "value": "b",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "a",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Query",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:16001/weatherDataPoints/search/query?statistic=MAX&metricType=TEMPERATURE&timeFrom=2023-05-22T00:00:00&timeTo=2023-07-22T00:00:00",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "16001",
+              "path": [
+                "weatherDataPoints",
+                "search",
+                "query"
+              ],
+              "query": [
+                {
+                  "key": "ids",
+                  "value": "e920ce80-4a85-4e83-b20f-8f2d59be4b67",
+                  "disabled": true
+                },
+                {
+                  "key": "statistic",
+                  "value": "MAX"
+                },
+                {
+                  "key": "metricType",
+                  "value": "TEMPERATURE"
+                },
+                {
+                  "key": "ids",
+                  "value": "86c422a2-feec-4f27-9337-eb1ea514d75a",
+                  "disabled": true
+                },
+                {
+                  "key": "timeFrom",
+                  "value": "2023-05-22T00:00:00"
+                },
+                {
+                  "key": "timeTo",
+                  "value": "2023-07-22T00:00:00"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:16001/weatherDataPoints/75d36a32-8205-4f76-acab-bd8e465f0133",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "16001",
+              "path": [
+                "weatherDataPoints",
+                "75d36a32-8205-4f76-acab-bd8e465f0133"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"weatherSensorId\": \"86f0ca67-8d97-4301-b9df-6a621ca5dc77\",\r\n  \"metricType\": \"TEMPERATURE\",\r\n  \"metricValue\": \"1.5\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:16001/weatherDataPoints",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "16001",
+              "path": [
+                "weatherDataPoints"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Weather Stations",
+      "item": [
+        {
+          "name": "All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:16001/weatherStations",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "16001",
+              "path": [
+                "weatherStations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:16001/weatherStations/1234",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "16001",
+              "path": [
+                "weatherStations",
+                "1234"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"longitude\": 0,\r\n  \"latitude\": 0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:16001/weatherStations",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "16001",
+              "path": [
+                "weatherStations"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Weather Sensors",
+      "item": [
+        {
+          "name": "All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:16001/weatherSensors",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "16001",
+              "path": [
+                "weatherSensors"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:16001/weatherSensors/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "16001",
+              "path": [
+                "weatherSensors",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"weatherStationId\": \"abb1be7a-35e5-4aa6-a2ad-e3e06239839a\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:16001/weatherSensors",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "16001",
+              "path": [
+                "weatherSensors"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
