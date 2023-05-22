@@ -5,6 +5,7 @@ import com.gen.weather.entitites.MetricType;
 import com.gen.weather.entitites.WeatherDataPoint;
 import com.gen.weather.entitites.WeatherSensor;
 import com.gen.weather.exceptions.NotFoundException;
+import com.gen.weather.providers.aggregation.*;
 import com.gen.weather.repositories.WeatherDataPointRepository;
 import com.gen.weather.repositories.WeatherSensorRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,10 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,6 +29,11 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class WeatherDataPointServiceImplTest {
+    private static final Map<String, MetricAggregationStrategy> METRIC_AGGREGATION_STRATEGY_MAP = Map.of(
+            "AVERAGE", new AverageMetricAggregationStrategy(),
+            "MAXIMUM", new MaxMetricAggregationStrategy(),
+            "MINIMUM", new MinMetricAggregationStrategy(),
+            "SUM", new SumMetricAggregationStrategy());
     private WeatherDataPointServiceImpl weatherDataPointService;
 
 
@@ -43,7 +46,8 @@ class WeatherDataPointServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        weatherDataPointService = new WeatherDataPointServiceImpl(weatherDataPointRepository, weatherSensorRepository);
+        weatherDataPointService = new WeatherDataPointServiceImpl(
+                weatherDataPointRepository, weatherSensorRepository, METRIC_AGGREGATION_STRATEGY_MAP);
     }
 
     @ParameterizedTest

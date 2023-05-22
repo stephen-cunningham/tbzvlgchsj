@@ -119,10 +119,10 @@ If no fix was provided for this by the Hibernate and/or Spring teams, an alterna
 Security should be implemented across the application. I didn't do so due to time constraints, since the API isn't publicly available, and because it is simply a POC.
 
 ### Improve test coverage
-I have written a number of unit tests and integration tests. Test coverage is currently ~80-90%:
-* class coverage: 87% (27/31)
-* method coverage: 84% (62/73)
-* line coverage: 88% (157/177)
+I have written a number of unit tests and integration tests. Test coverage is currently ~90%:
+* class coverage: 100% (31/31)
+* method coverage: 91% (65/71)
+* line coverage: 92% (159/171)
 This is decent, but I would like to improve it. In particular, I would like to put additional efforts into adding more integration tests.
 
 Some small additional effort would easily push the test coverage into the high 90s, which would be nice and comprehensive.

@@ -2,6 +2,7 @@ package com.gen.weather.entitites;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -29,11 +30,14 @@ class WeatherDataPointTest {
 
   @Test
   void gettersAndSetters() {
+    LocalDateTime currentTime = LocalDateTime.now();
     WeatherDataPoint weatherDataPoint = new WeatherDataPoint();
     weatherDataPoint.setWeatherSensorId(WEATHER_SENSOR_ID);
     weatherDataPoint.setMetricType(METRIC_TYPE);
     weatherDataPoint.setMetricValue(METRIC_VALUE);
+    weatherDataPoint.setMetricTimestamp(currentTime);
 
     assertFieldsSetCorrectly(weatherDataPoint);
+    assertEquals(currentTime, weatherDataPoint.getMetricTimestamp());
   }
 }

@@ -1,10 +1,12 @@
 package com.gen.weather.providers.aggregation;
 
 import com.gen.weather.exceptions.AggregationException;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
 
+@Component("MAX")
 public class MaxMetricAggregationStrategy implements MetricAggregationStrategy {
     @Override
     public Double aggregate(List<Double> metricValues) {
