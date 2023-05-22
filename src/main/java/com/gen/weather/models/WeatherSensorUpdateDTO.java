@@ -4,4 +4,4 @@ import com.gen.weather.entitites.SensorStatus;
 
 import java.util.UUID;
 
-public record WeatherSensorStatusUpdateDTO(UUID id, SensorStatus sensorStatus) {}
+public record WeatherSensorUpdateDTO(UUID id, SensorStatus sensorStatus) {}

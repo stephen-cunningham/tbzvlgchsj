@@ -8,21 +8,32 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WeatherDataPointTest {
+  private static final UUID WEATHER_SENSOR_ID = UUID.randomUUID();
+  private static final MetricType METRIC_TYPE = MetricType.HUMIDITY;
+  private static final Double METRIC_VALUE = 20.1;
+
+  private WeatherDataPoint weatherDataPoint;
+
   @Test
-  void gettersAndSetters_ShouldWork() {
-    final UUID weatherSensorId = UUID.randomUUID();
-    final MetricType metricType = MetricType.HUMIDITY;
-    final Double metricValue = 20.1;
+  void overloadedConstructor() {
+    assertFieldsSetCorrectly(new WeatherDataPoint(WEATHER_SENSOR_ID, METRIC_TYPE, METRIC_VALUE));
+  }
 
-    WeatherDataPoint weatherDataPoint = new WeatherDataPoint();
-    weatherDataPoint.setWeatherSensorId(weatherSensorId);
-    weatherDataPoint.setMetricType(metricType);
-    weatherDataPoint.setMetricValue(metricValue);
-
+  private void assertFieldsSetCorrectly(WeatherDataPoint weatherDataPoint) {
     assertAll(
-        () -> assertEquals(weatherSensorId, weatherDataPoint.getWeatherSensorId()),
-        () -> assertEquals(metricType, weatherDataPoint.getMetricType()),
-        () -> assertEquals(metricValue, weatherDataPoint.getMetricValue())
+            () -> assertEquals(WEATHER_SENSOR_ID, weatherDataPoint.getWeatherSensorId()),
+            () -> assertEquals(METRIC_TYPE, weatherDataPoint.getMetricType()),
+            () -> assertEquals(METRIC_VALUE, weatherDataPoint.getMetricValue())
     );
+  }
+
+  @Test
+  void gettersAndSetters() {
+    WeatherDataPoint weatherDataPoint = new WeatherDataPoint();
+    weatherDataPoint.setWeatherSensorId(WEATHER_SENSOR_ID);
+    weatherDataPoint.setMetricType(METRIC_TYPE);
+    weatherDataPoint.setMetricValue(METRIC_VALUE);
+
+    assertFieldsSetCorrectly(weatherDataPoint);
   }
 }

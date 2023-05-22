@@ -1,7 +1,7 @@
 package com.gen.weather.controllers;
 
+import com.gen.weather.exceptions.NotFoundException;
 import com.gen.weather.models.ErrorResponse;
-import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionFailedException;
@@ -18,7 +18,8 @@ import java.util.Optional;
 @RestControllerAdvice
 public class GeneralExceptionHandler {
   public static final String BAD_REQUEST_CODE = "bad.request";
-  private static final Logger logger = LoggerFactory.getLogger(GeneralExceptionHandler.class);
+  public static final String NOT_FOUND_CODE = "not.found";
+  private static final Logger LOGGER = LoggerFactory.getLogger(GeneralExceptionHandler.class);
 
   @ExceptionHandler({HttpMessageNotReadableException.class, DataIntegrityViolationException.class, ConversionFailedException.class, IllegalArgumentException.class})
   @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -29,14 +30,20 @@ public class GeneralExceptionHandler {
 
   @ExceptionHandler(ResourceNotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
-  public ErrorResponse handleNotFound() {
-    return new ErrorResponse("not.found", "The resource was not found");
+  public ErrorResponse handleResourceNotFound() {
+    return new ErrorResponse(NOT_FOUND_CODE, "The resource was not found");
+  }
+
+  @ExceptionHandler
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public ErrorResponse handleCustomNotFound(NotFoundException ex) {
+    return new ErrorResponse(NOT_FOUND_CODE, ex.getMessage());
   }
 
   @ExceptionHandler
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   public ErrorResponse handleUnexpectedErrors(Exception ex) {
-    logger.error("An unexpected error has occurred. See the following for details:", ex);
+    LOGGER.error("An unexpected error has occurred. See the following for details:", ex);
 
     return new ErrorResponse(
             "unexpected.error", "An unexpected error has occurred. Please contact an administrator.");

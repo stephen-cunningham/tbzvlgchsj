@@ -19,8 +19,8 @@ public class WeatherStationController {
     }
 
     @PostMapping(URI_BASE)
-    public ResponseEntity<Void> createWeatherStation(@RequestBody WeatherStationDTO weatherStationDTO) {
-        weatherStationRepository.save(WeatherStation.from(weatherStationDTO));
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<WeatherStation> createWeatherStation(@RequestBody WeatherStationDTO weatherStationDTO) {
+        WeatherStation weatherStation = weatherStationRepository.save(WeatherStation.from(weatherStationDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(weatherStation);
     }
 }

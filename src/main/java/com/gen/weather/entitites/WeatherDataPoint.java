@@ -1,7 +1,6 @@
 package com.gen.weather.entitites;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.gen.weather.models.WeatherDataPointDTO;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -65,14 +64,5 @@ public class WeatherDataPoint extends IdentifiableEntity {
 
   public void setMetricTimestamp(LocalDateTime metricTimestamp) {
     this.metricTimestamp = metricTimestamp;
-  }
-
-  public static WeatherDataPoint from(WeatherDataPointDTO weatherDataPointDTO) {
-    WeatherDataPoint weatherDataPoint = new WeatherDataPoint();
-    weatherDataPoint.setWeatherSensorId(weatherDataPointDTO.weatherSensorId());
-    weatherDataPoint.setMetricType(weatherDataPointDTO.metricType());
-    weatherDataPoint.setMetricValue(weatherDataPointDTO.metricValue());
-
-    return weatherDataPoint;
   }
 }

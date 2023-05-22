@@ -1,6 +1,5 @@
 package com.gen.weather.entitites;
 
-import com.gen.weather.models.WeatherSensorCreateDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

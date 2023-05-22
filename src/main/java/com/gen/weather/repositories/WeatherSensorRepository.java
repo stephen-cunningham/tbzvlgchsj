@@ -1,11 +1,11 @@
 package com.gen.weather.repositories;
 
-import com.gen.weather.entitites.WeatherDataPoint;
 import com.gen.weather.entitites.WeatherSensor;
-import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
+
+import java.util.UUID;
 
 @RepositoryRestResource
 public interface WeatherSensorRepository extends JpaRepository<WeatherSensor, UUID> {

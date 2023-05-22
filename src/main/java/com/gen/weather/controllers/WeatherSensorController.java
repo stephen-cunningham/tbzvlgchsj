@@ -1,7 +1,8 @@
 package com.gen.weather.controllers;
 
+import com.gen.weather.entitites.WeatherSensor;
 import com.gen.weather.models.WeatherSensorCreateDTO;
-import com.gen.weather.models.WeatherSensorStatusUpdateDTO;
+import com.gen.weather.models.WeatherSensorUpdateDTO;
 import com.gen.weather.services.WeatherSensorService;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
@@ -21,14 +22,14 @@ public class WeatherSensorController {
     }
 
     @PostMapping(URI_BASE)
-    public ResponseEntity<Void> createWeatherSensor(@RequestBody WeatherSensorCreateDTO weatherSensorCreateDTO) {
-        weatherSensorService.save(weatherSensorCreateDTO.weatherStationId());
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<WeatherSensor> createWeatherSensor(@RequestBody WeatherSensorCreateDTO weatherSensorCreateDTO) {
+        WeatherSensor weatherSensor = weatherSensorService.save(weatherSensorCreateDTO.weatherStationId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(weatherSensor);
     }
 
     @PatchMapping(URI_BASE)
-    public ResponseEntity<Void> updateWeatherSensorStatus(@RequestBody WeatherSensorStatusUpdateDTO weatherSensorStatusUpdateDTO) {
-        weatherSensorService.updateStatus(weatherSensorStatusUpdateDTO.id(), weatherSensorStatusUpdateDTO.sensorStatus());
+    public ResponseEntity<Void> updateWeatherSensorStatus(@RequestBody WeatherSensorUpdateDTO weatherSensorUpdateDTO) {
+        weatherSensorService.updateStatus(weatherSensorUpdateDTO.id(), weatherSensorUpdateDTO.sensorStatus());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
