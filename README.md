@@ -41,7 +41,7 @@ However, this would require additional weight in the payloads coming from the se
 Secondly, it would introduce additional complexity and work, perhaps unnecessarily. I felt it was best to go with simplicity for now. More importantly though, I feel like 
 dealing with only one unit of measurement for each metric makes sense to guarantee data integrity. 
 
-Some consideration was given to the fact that a significant proportion of Genesys' customer base live in the United States, where Fahrenheit is used. However, if we ever integrate this API with a front-end, the client code could perform the conversion based on what's needed.
+Some consideration was given to the fact that a significant proportion of the company's customer base live in the United States, where Fahrenheit is used. However, if we ever integrate this API with a front-end, the client code could perform the conversion based on what's needed.
 
 ### Laying the groundwork for future development
 Built into `WEATHER_SENSORS`, we have two fields that aren't yet directly used in the application. They are `SENSOR_STATUS` and `LAST_DATA_CREATION_TIMESTAMP`. They will be useful in the future.
